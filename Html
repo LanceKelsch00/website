@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herriman PC Repair & Tech Support</title>
+    <style>
+        /* Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        /* CSS Variables */
+        :root {
+            --bg-dark: #07090e;
+            --bg-card: rgba(20, 24, 34, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --guarantee-gold: #fbbf24;
+            --guarantee-glow: rgba(251, 191, 36, 0.2);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(15, 23, 42, 0.6);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 { line-height: 1.2; font-weight: 700; }
+        p { color: var(--text-muted); }
+        a { text-decoration: none; color: inherit; }
+
+        /* Gradients & Glows */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .bg-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(0,0,0,0) 70%);
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section { padding: 100px 0; }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        nav {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(7, 9, 14, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px; }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 120px 0 80px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        /* Small Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            padding: 8px 16px;
+            border-radius: 50px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .badge svg { width: 16px; height: 16px; fill: var(--accent-blue); }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .about-text h2 { font-size: 2.5rem; margin-bottom: 24px; }
+        .about-text p { margin-bottom: 16px; font-size: 1.1rem; }
+        
+        .about-image {
+            background: linear-gradient(135deg, rgba(30,41,59,0.8), rgba(15,23,42,0.8));
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: conic-gradient(from 90deg at 50% 50%, transparent 0%, var(--accent-purple) 50%, transparent 100%);
+            animation: spin 10s linear infinite;
+            opacity: 0.1;
+        }
+
+        /* Services Section */
+        .section-header { text-align: center; margin-bottom: 64px; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 16px; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 32px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(59, 130, 246, 0.05);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .service-icon svg { width: 24px; height: 24px; stroke: var(--accent-blue); fill: none; stroke-width: 2; }
+        .service-card h3 { margin-bottom: 12px; font-size: 1.2rem; }
+        .service-card p { font-size: 0.95rem; }
+
+        /* Trust & Why Choose Me Section */
+        .trust-section {
+            background: var(--glass-bg);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            position: relative;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+        }
+
+        .trust-list { list-style: none; margin-top: 32px; }
+        .trust-list li {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .trust-list svg { width: 24px; height: 24px; fill: var(--accent-blue); flex-shrink: 0; }
+
+        /* Big Guarantee Highlight Block */
+        .guarantee-block {
+            background: linear-gradient(135deg, rgba(20, 24, 34, 0.9), rgba(15, 23, 42, 0.9));
+            border: 2px solid var(--guarantee-gold);
+            border-radius: 20px;
+            padding: 48px;
+            text-align: center;
+            box-shadow: 0 0 40px var(--guarantee-glow);
+            position: relative;
+            overflow: hidden;
+            margin-top: -50px; /* Overlaps sections slightly */
+            z-index: 10;
+        }
+
+        .guarantee-block h2 {
+            color: var(--guarantee-gold);
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .guarantee-block p {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 48px;
+        }
+
+        .contact-form { display: flex; flex-direction: column; gap: 16px; }
+        
+        .contact-form input, .contact-form textarea {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border-subtle);
+            padding: 16px;
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .contact-form textarea { resize: vertical; min-height: 120px; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3rem; }
+            .about-grid, .trust-grid, .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+            .guarantee-block h2 { font-size: 2rem; flex-direction: column; }
+            .contact-wrap { padding: 32px 24px; }
+        }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero-btns { flex-direction: column; }
+            .section-header h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <div class="container">
+        <nav>
+            <div class="logo">
+                Herriman<span class="text-gradient">Tech</span>
+            </div>
+            <a href="#contact" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">Get Help Now</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero container">
+        <h1>Reliable Computer Repair & Tech Support in <span class="text-gradient">Herriman, UT</span></h1>
+        <p>Fast, honest, and affordable PC repair, custom builds, and troubleshooting from a dedicated local technician.</p>
+        
+        <div class="hero-btns">
+            <a href="#contact" class="btn btn-primary">Request Service</a>
+            <a href="#services" class="btn btn-secondary">View Services</a>
+        </div>
+
+        <div class="trust-badges">
+            <div class="badge">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Local to Herriman
+            </div>
+            <div class="badge">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Honest Pricing
+            </div>
+            <div class="badge">
+                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                Satisfaction Guaranteed
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>Your Local Tech Expert</h2>
+                <p>I am an independent local technician dedicated to providing top-tier, honest tech support for the Herriman community and surrounding areas.</p>
+                <p>With extensive hands-on experience building, upgrading, and repairing computers, I focus on practical solutions rather than upselling unnecessary parts. When you work with me, you communicate directly with the technician handling your equipment—no middlemen, no runarounds.</p>
+                <p>I treat every machine with the utmost respect and handle all hardware with precision and care. Whether you need a massive gaming rig built from scratch or simply need to recover a slow laptop, you will get clear communication and professional results.</p>
+            </div>
+            <div class="about-image">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--border-subtle)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="container">
+        <div class="section-header">
+            <h2>Expert Tech Services</h2>
+            <p>From hardware fixes to software optimization, I handle it all.</p>
+        </div>
+        
+        <div class="services-grid">
+            <!-- Card 1 -->
+            <div class="service-card">
+                <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+                <h3>Computer Repair</h3>
+                <p>Diagnostics and fixes for dead motherboards, broken screens, power supply failures, and more.</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="service-card">
+                <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></div>
+                <h3>Custom PC Builds</h3>
+                <p>Clean desk setups, perfect cable management, and balanced part selection for your specific budget.</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="service-card">
+                <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+                <h3>Hardware Upgrades</h3>
+                <p>Breathe new life into an old PC. RAM additions, SSD swaps, and GPU installations done safely.</p>
+            </div>
+            <!-- Card 4 -->
+            <div class="service-card">
+                <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <h3>System Optimization</h3>
+                <p>Bloatware removal, driver updates, and OS tuning to make your PC feel brand new again.</p>
+            </div>
+            <!-- Card 5 -->
+            <div class="service-card">
+                <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <h3>Virus & Malware</h3>
+                <p>Deep system scans and secure removal of malicious software, spyware, and intrusive pop-ups.</p>
+            </div>
+            <!-- Card 6 -->
+            <div class="service-card">
+                <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+                <h3>Troubleshooting</h3>
+                <p>Random blue screens, crashing games, or weird noises? I'll find the root cause and fix it.</p>
+            </div>
+            <!-- Card 7 -->
+            <div class="service-card">
+                <div class="service-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                <h3>Performance Fixes</h3>
+                <p>Thermal paste replacement, dust cleaning, and airflow adjustments to stop overheating.</p>
+            </div>
+            <!-- Card 8 -->
+            <div class="service-card">
+                <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+                <h3>Setup & Install Help</h3>
+                <p>In-home Wi-Fi network configuration, printer setup, or multi-monitor workstation integration.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Me Section -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="trust-grid">
+                <div>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 24px;">Why Choose Me?</h2>
+                    <p style="font-size: 1.1rem;">I understand that your computer holds your livelihood, personal data, and expensive components. I treat your gear with the exact same care I treat my own.</p>
+                    <ul class="trust-list">
+                        <li>
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Direct communication (No call centers or middlemen)
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Transparent, honest pricing
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Strictly no upselling or unnecessary repairs
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Careful, static-free handling of all hardware
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Guarantee Block (CRUCIAL) -->
+    <div class="container">
+        <div class="guarantee-block">
+            <h2>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--guarantee-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Your Hardware Is Protected.
+            </h2>
+            <p>Peace of mind is non-negotiable. <strong>If I damage or break a part during service or installation, I will personally replace it or pay for it in full — no exceptions.</strong> You are hiring a professional, and I stand by my accountability.</p>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container">
+        <div class="section-header">
+            <h2>Ready to fix your PC?</h2>
+            <p>Fill out the form below or text me for a free diagnostic consultation.</p>
+        </div>
+
+        <div class="contact-wrap">
+            <div>
+                <h3 style="font-size: 1.8rem; margin-bottom: 16px;">Get Help Today</h3>
+                <p style="margin-bottom: 24px;">Send over a brief description of what you need. Whether it's a completely dead PC, a part you need installed, or a custom build request, I'll get back to you quickly.</p>
+                
+                <div style="margin-bottom: 32px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <span><strong>Service Area:</strong> Herriman, UT & Surrounding Areas</span>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('This is a template! Connect this form to a service like Formspree or Netlify Forms to receive emails.');">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="tel" placeholder="Phone Number (Optional)">
+                <textarea placeholder="Tell me about your computer issue or build request..." required></textarea>
+                <button type="submit" class="btn btn-primary">Message for Availability</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 HerrimanTech Local PC Repair. All rights reserved.</p>
+            <p style="margin-top: 8px; font-size: 0.8rem;">Serving Herriman, Utah.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
